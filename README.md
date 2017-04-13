@@ -18,6 +18,7 @@ Supported Providers
 * DigitalOcean
 * Exoscale
 * Google Cloud Platform
+* iland cloud platform
 * Openstack (Mirantis)
 * Virtualbox >= 4.3.30
 * VMware Fusion >= 8.0
@@ -222,6 +223,49 @@ vm := &gcp.VM{
   err := vm.Provision()
   if err != nil {
         return err
+  }
+ ```
+
+ iland cloud platform
+----------
+
+``` go
+
+var template = []Template{
+  Template{
+        VappTemplateUUID: "dal02.ilandcloud.com:urn:vcloud:vapptemplate:99999999-d86f-4c02-8e0a-d80f793619da",
+        Name: "SQL Test VM", 
+        Description: "desc", 
+        IPAddressMode: "POOL", 
+        VappTemplateName: "Ubuntu Linux Server 14.04", 
+        VMTemplateUUID: "dal02.ilandcloud.com:urn:vcloud:vm:aaaaaba0-d9c6-4a77-ada1-1a0e66a12320",
+        IPAddress: "", 
+        StorageProfileUUID: "dal02.ilandcloud.com:urn:vcloud:vdcstorageProfile:77777753-9070-49b0-89ec-3a2009970045",
+        NetworkUUID: "dal02.ilandcloud.com:urn:vcloud:network:99993332-2381-4000-b508-76c94984d0bb"
+    },
+  }
+  var details = &Details{UUID: "dal02.ilandcloud.com:urn:vcloud:vm:60555555-64f8-4555-b066-b7d2a9cd5555"}
+  var vm = &VM{
+      Details: details,
+      Config: &iland.Config{
+          "ApiBaseUrl":"https://api.ilandcloud.com/ecs",
+          "AccessUrl":"https://console.ilandcloud.com/auth/realms/iland-core/protocol/openid-connect/token",
+          "ClientId":"YOUR_CLIENT_ID",
+          "ClientSecret":"YOUR_CLIENT_SECRET",
+          "Username":"YOUR_USERNAME",
+          "Password":"YOUR_PASSWORD",
+          "RefreshUrl":"https://console.ilandcloud.com/auth/realms/iland-core/protocol/openid-connect/token"
+      }
+      Credentials: ssh.Credentials{
+          SSHUser: "YOUR_SSH_USERNAME",
+          SSHPassword: "YOUR_SSH_PASSWORD"
+      }, 
+      Template: template
+  }
+
+  err := vm.Provision()
+  if err != nil {
+      return err
   }
  ```
 

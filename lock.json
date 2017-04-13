@@ -1,5 +1,5 @@
 {
-    "memo": "c84d6346cc33a303fbb5b8d10bbac57c72a7d4e5e8bf0b426d3a5f40b61e3d6a",
+    "memo": "e32309ebb04cfc846fa6a2300a39f92c0b1eab059068000a6cd50390f0b007d8",
     "projects": [
         {
             "name": "cloud.google.com/go",
@@ -139,6 +139,14 @@
                 "openstack/networking/v2/networks",
                 "openstack/utils",
                 "pagination"
+            ]
+        },
+        {
+            "name": "github.com/ilanddev/golang-sdk",
+            "branch": "master",
+            "revision": "7916d61113fe4f1f683a345939058ea572a52768",
+            "packages": [
+                "."
             ]
         },
         {
